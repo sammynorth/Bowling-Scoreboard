@@ -84,7 +84,3 @@ def getFrameScore(frame, gameString):
 	for i in range(frame+1):
 		score+=sf.getFrameScore(i,gameString)  
 	return score
-
-createScoreboard('X-X-9/-8S1-X-X-X-X-X-XXX')
-
-
