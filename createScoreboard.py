@@ -40,13 +40,13 @@ def createScoreboard(gameString):
 	frame = frameList[-1]
 	secondBall = ''
 	thirdBall = ''
-	firstBall = f'{frameList[0]} '
+	firstBall = f'{frame[0]} '
 	scoreboard+=f'{verticalLine} '
-	if(frameList[1] == 'S'):
-		firstBall = f'{frameList[0]}S'
-		secondBall = f'{frameList[2]} '
+	if(frame[1] == 'S'):
+		firstBall = f'{frame[0]}S'
+		secondBall = f'{frame[2]} '
 	else:
-		secondBall = f'{frameList[1]} '
+		secondBall = f'{frame[1]} '
 	if(len(frame.replace('S','')) == 3):
 		thirdBall = frame.replace('S','')[-1]
 		if(frame[-1] == 'S'):
@@ -84,3 +84,5 @@ def getFrameScore(frame, gameString):
 	for i in range(frame+1):
 		score+=sf.getFrameScore(i,gameString)  
 	return score
+
+createScoreboard('9/-X-9/-8S1-X-X-X-X-X-XXX')
