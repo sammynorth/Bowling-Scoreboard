@@ -1,5 +1,3 @@
-import scoreFunctions as sf
-
 topLeft = '╔'
 topRight = '╗'
 bottomLeft = '╚'
@@ -82,7 +80,113 @@ def createScoreboard(gameString):
 def getFrameScore(frame, gameString):
 	score = 0
 	for i in range(frame+1):
-		score+=sf.getFrameScore(i,gameString)  
+		score+=getFrameScoreHelper(i,gameString)  
 	return score
+
+# function that gets an individual frames score from a game string
+def getFrameScoreHelper(frame, gameString):
+	tempScore = 0
+	stringList = gameString.replace('S','').split('-')
+	frameString = stringList[frame]
+	frameList = [char for char in frameString]
+	if(frame < 8):
+		nextFrameString = stringList[frame + 1]
+		finalFrameString = stringList[frame + 2]
+		nextFrameList = [char for char in nextFrameString]
+		finalFrameList = [char for char in finalFrameString]
+		if(frameString == 'X'):
+			tempScore+=10
+			if(nextFrameString == 'X'):
+				tempScore+=10
+				if(finalFrameString == 'X'):
+					tempScore+=10
+				else:
+					if(finalFrameList[0] == 'X'):
+						tempScore+=10
+					else:
+						tempScore+=int(finalFrameList[0])
+			else:
+				if(nextFrameList[1] == '/'):
+					tempScore+=10
+				else:
+					tempScore+=(int(nextFrameList[0]))
+					tempScore+=(int(nextFrameList[1]))
+		elif(frameList[1] == '/'):
+			tempScore+=10
+			if(nextFrameString == 'X'):
+				tempScore+=10
+			else:
+				tempScore+=int(nextFrameList[0])
+		else:
+			tempScore+=int(frameList[0])
+			tempScore+=int(frameList[1])
+	elif(frame == 8): #ninth frame due to indexing
+		nextFrameString = stringList[frame + 1][0]
+		if(nextFrameString != 'X'):
+			nextFrameString = stringList[frame + 1][0:2]
+			if('/' not in nextFrameString):
+				finalFrameString = '0'
+			else:
+				finalFrameString = stringList[frame + 1][2]
+		else:
+			finalFrameString = stringList[frame + 1][1]
+		nextFrameList = [char for char in nextFrameString]
+		finalFrameList = [char for char in finalFrameString]
+		if(frameString == 'X'):
+			tempScore+=10
+			if(nextFrameString == 'X'):
+				tempScore+=10
+				if(finalFrameString == 'X'):
+					tempScore+=10
+				else:
+					tempScore+=int(finalFrameList[0])
+			else:
+				if(nextFrameList[1] == '/'):
+					tempScore+=10
+				else:
+					tempScore+=(int(nextFrameList[0]))
+					tempScore+=(int(nextFrameList[1]))
+		elif(frameList[1] == '/'):
+			tempScore+=10
+			if(nextFrameString == 'X'):
+				tempScore+=10
+			else:
+				tempScore+=int(nextFrameList[0])
+		else:
+			tempScore+=int(frameList[0])
+			tempScore+=int(frameList[1])
+	elif(frame == 9): #tenth frame
+		firstBall = frameList[0]
+		secondBall = frameList[1]
+		try:
+			thirdBall = frameList[2]
+		except IndexError:
+			thirdBall = '0'
+		if(firstBall == 'X'): # first ball struck
+			tempScore+=10
+			if(secondBall == 'X'):# first and second ball struck
+				tempScore+=10
+				if(thirdBall == 'X'):# struck out tenth frame
+					tempScore+=10
+				else: # first two strikes then not strike
+					tempScore+=int(thirdBall)
+			else:# first ball struck, second ball did not
+				if(thirdBall == '/'):
+					tempScore+=10
+				else:
+					tempScore+=(int(secondBall))
+					tempScore+=(int(thirdBall))
+		elif(secondBall == '/'): # spare on first/second ball
+			tempScore+=10
+			if(thirdBall == 'X'):
+				tempScore+=10
+			else:
+				tempScore+=int(thirdBall)
+		else: # open frame
+			tempScore+=int(firstBall)
+			tempScore+=int(secondBall)
+	
+	return tempScore
+
 
 createScoreboard('9/-X-9/-8S1-X-X-X-X-X-XXX')
