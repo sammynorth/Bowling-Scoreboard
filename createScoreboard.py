@@ -53,7 +53,7 @@ def createScoreboard(gameString):
 			thirdBall = f'{thirdBall} '
 		scoreboard+=f'{firstBall}{verticalLine} {secondBall}{verticalLine} {thirdBall}{verticalLine}'
 	else:
-		scoreboard+=f'   {verticalLine}{firstBall}{verticalLine} {secondBall}{verticalLine}'
+		scoreboard+=f'  {verticalLine} {firstBall}{verticalLine} {secondBall}{verticalLine}'
 
 	scoreboard+=f'\n{verticalLine}'
 	scoreboard+=f'   {bottomLeft}{horizontalLine*3}{rightTee}'*10
@@ -189,4 +189,4 @@ def getFrameScoreHelper(frame, gameString):
 	return tempScore
 
 
-createScoreboard('9/-X-9/-8S1-X-X-X-X-X-XXX')
+createScoreboard('9/-X-9/-8S1-X-63-X-8/-X-90')
