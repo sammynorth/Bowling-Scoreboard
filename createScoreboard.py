@@ -189,4 +189,4 @@ def getFrameScoreHelper(frame, gameString):
 	return tempScore
 
 
-createScoreboard('9/-X-9/-8S1-X-63-X-8/-X-90')
+createScoreboard('X-9/-8S/-X-X-X-90-X-9/-XXX')
