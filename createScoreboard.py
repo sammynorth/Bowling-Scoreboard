@@ -188,5 +188,9 @@ def getFrameScoreHelper(frame, gameString):
 	
 	return tempScore
 
+def main():
+	gameString = 'X-X-X-X-X-X-X-X-X-XXX'
+	createScoreboard(gameString)
 
-createScoreboard('X-9/-8S/-X-X-X-90-X-9/-XXX')
+if __name__ == '__main__':
+	main()
