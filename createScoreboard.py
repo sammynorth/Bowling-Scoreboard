@@ -14,7 +14,7 @@ intersection = '╬'
 
 
 def createScoreboard(gameString):
-	frameList = gameString.split('-')
+	frameList = gameString.replace('x','X').replace('s','S').split('-')
 	# initialize string
 	scoreboard = f'{topLeft}'
 	scoreboard+=f'{horizontalLine*3}{topTee}'*20
